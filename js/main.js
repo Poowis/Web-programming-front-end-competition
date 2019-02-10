@@ -60,9 +60,3 @@ Vue.component("navbar", {
                 </nav>
                 `,
 })
-
-let navbar = new Vue({
-    el: "#navbar",
-    data: {
-    }
-})

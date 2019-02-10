@@ -1,0 +1,6 @@
+.slide-enter-active, .slide-leave-active {
+    transition: .5s;
+}
+.slide-enter, .slide-leave-to {
+    transform: scaleX(0);
+}
