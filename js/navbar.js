@@ -1,12 +1,20 @@
 let navbar = new Vue({
     el: "#navbar",
     data: {
-        loggedIn: true,
-        search: false,
+        loggedIn: false,
+        searching: false,
+        search: "",
+        popUpRegister: false,
     },
     methods: {
-        toggleSearch: function() {
-            this.search = !this.search;
+        toggleLogIn: function () {
+            this.loggedIn = !this.loggedIn;
         },
-    }
+        toggleSearch: function () {
+            this.searching = !this.searching;
+            if (!this.searching) {
+                this.search = "";
+            }
+        },
+    },
 })
