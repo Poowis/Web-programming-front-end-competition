@@ -182,6 +182,29 @@
 
     </div>
 
+
+    <div id="theater">
+        <div class="jumbotron">
+            <div class="row" v-for="row in thearter.rows">
+                {{row.name}}
+                <div class="" style="width: 40px;" v-for="seat in row.seats">
+                    <div v-if="seat.status == 'available'" class="card bg-success">
+                        {{seat.name}}
+                    </div>
+                    <div v-else-if="seat.status == 'selected'" class="card bg-primary">
+                        {{seat.name}}
+                    </div>
+                    <div v-else-if="seat.status == 'booked'" class="card bg-danger">
+                        {{seat.name}}
+                    </div>
+                    <div v-else-if="seat.status == 'notAvailable'" class="card bg-secondary">
+                        {{seat.name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="footer" class="jumbotron-fluid bg-danger text-light">
         <p class="text-center py-2 my-0">This website is a part of Web programming subject.</p>
     </div>
@@ -191,13 +214,20 @@
     <script src="resources/bootstrap.min.js"></script>
     <script src="resources/vue.js"></script>
     <script src="js/navbar.js"></script>
-    <!-- <script src="js/movies.js"></script> -->
+    <script src="js/theaters.js"></script>
 
     <script>
         let body = new Vue({
             el: "#body",
 
-        })
+        });
+        let theater = new Vue({
+            el: "#theater",
+            data: {
+                thearter: theaters[0],
+
+            }
+        });
     </script>
 </body>
 
