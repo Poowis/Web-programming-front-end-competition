@@ -7,6 +7,8 @@
     <title>Home</title>
     <link rel="stylesheet" href="resources/bootstrap.min.css">
     <link rel="stylesheet" href="css/mycolors.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
 </head>
 
 <body class="bg-dark">
@@ -15,8 +17,8 @@
 
         <a class="navbar-brand" href="#">Navbar</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -24,12 +26,14 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-home"></i> Home
+                        <span class="sr-only">(current)</span>
+                    </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Movies
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-film"></i> Movies
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#movies">All movies</a>
@@ -39,27 +43,24 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Theatres</a>
+                    <a class="nav-link" href="#"><i class="fas fa-video"></i> Theatres</a>
                 </li>
             </ul>
 
             <form class="form-inline my-2 my-md-0">
                 <div class="input-group overflow-hidden mr-sm-2 rounded">
                     <transition name="slide">
-                        <input v-show="searching" class="form-control" type="search" placeholder="Search"
-                            aria-label="Search" v-model.trim="search">
+                        <input v-show="searching" class="form-control" type="search" placeholder="Search" aria-label="Search" v-model.trim="search">
                     </transition>
                     <div :class="{'input-group-append': searching}">
-                        <button @click.prevent="toggleSearch" class="btn btn-dark position-relative"
-                            type="submit">Search</button>
+                        <button @click.prevent="toggleSearch" class="btn btn-dark position-relative" type="submit">Search</button>
                     </div>
                 </div>
             </form>
 
             <div class="btn-group">
 
-                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{loggedIn ? "My Profile" : "Log In"}}
                 </button>
 
@@ -72,28 +73,83 @@
                 <div v-else class="dropdown-menu dropdown-menu-md-right">
                     <form class="px-4 py-2">
                         <div class="form-group">
-                            <label for="exampleDropdownFormEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail1"
-                                placeholder="email@example.com">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" placeholder="email@example.com">
                         </div>
                         <div class="form-group">
-                            <label for="exampleDropdownFormPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword1"
-                                placeholder="Password">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
                         </div>
                         <div class="custom-control custom-checkbox mb-3" @click.stop>
-                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">Remember me</label>
+                            <input type="checkbox" class="custom-control-input" id="remember">
+                            <label class="custom-control-label" for="remember">Remember me</label>
                         </div>
                         <button type="submit" class="btn btn-primary" @click.prevent="toggleLogIn">Sign in</button>
                     </form>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">New around here? Sign up</a>
+                    <a class="dropdown-item" href="#" @click.prevent="toggleRegister">New around here? Sign up</a>
                 </div>
 
             </div>
 
         </div>
+
+        <div id="popUpRegister" v-if="popUpRegister" class="fixed-top w-100 h-100">
+            <div class="container">
+                <div class="row h-100 align-items-start justify-content-center">
+                    <div class="col-lg-10 align-self-center">
+                        <div @click="toggleRegister" class="fixed-top w-100 h-100"></div>
+                        <div class="card p-4 align-self-center" style="z-index: 1040;">
+                            <div class="d-flex">
+                                <h4 class="mr-auto">Register</h4>
+                                <button @click="toggleRegister" type="button" class="btn btn-outline-dark">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <form class="pt-2 m-0">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="regname">Name</label>
+                                            <input type="text" class="form-control" id="regname" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="regsurname">Surname</label>
+                                            <input type="text" class="form-control" id="regsurname" placeholder="Surname">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="regemail">Email</label>
+                                            <input type="text" class="form-control" id="regemail" placeholder="email@example.com">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label for="regpassword">Password</label>
+                                            <input type="password" class="form-control" id="regpassword" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="regconfirmpassword">Password</label>
+                                            <input type="password" class="form-control" id="regconfirmpassword" placeholder="Confirm Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
     </nav>
 
     <div id="body">
@@ -122,16 +178,15 @@
         <div id="movies">
 
             <div id="genrebar" class="jumbotron-fluid mb-3 bg-danger position-sticky">
-                <a class="btn btn-danger rounded-0" href="#movies" role="button" :class="{active: genre==''}"
-                    style="margin-right: -5px;" @click="selectGenre('')">All Movies</a>
-                <a v-for="(categorie, index) in categories" :key="index" class="btn btn-danger rounded-0" href="#movies"
-                    role="button" :class="{active: categorie==genre}" @click="selectGenre(categorie)">{{categorie}}</a>
+                <a class="btn btn-danger rounded-0" href="#movies" role="button" :class="{active: genre==''}" style="margin-right: -5px;"
+                    @click="selectGenre('')">All Movies</a>
+                <a v-for="(categorie, index) in categories" :key="index" class="btn btn-danger rounded-0" href="#movies" role="button" :class="{active: categorie==genre}"
+                    @click="selectGenre(categorie)">{{categorie}}</a>
             </div>
 
             <div class="container">
                 <transition-group class="row" name="fade" tag="div">
-                    <div v-for="movie in movies" :key="movie.imdbID"
-                        v-show="movie.Title.toLowerCase().includes(search) && movie.Genre.includes(genre)"
+                    <div v-for="movie in movies" :key="movie.imdbID" v-show="movie.Title.toLowerCase().includes(search) && movie.Genre.includes(genre)"
                         class="col-12 col-sm-6 col-lg-4 col-xl-3">
                         <div class="card my-2">
                             <img class="card-img-top" :src="movie.Poster">
@@ -148,7 +203,7 @@
             </div>
 
         </div>
-        
+
     </div>
 
     <div id="footer" class="jumbotron-fluid bg-danger text-light">

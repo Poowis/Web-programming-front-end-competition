@@ -16,5 +16,8 @@ let navbar = new Vue({
                 this.search = "";
             }
         },
+        toggleRegister: function () {
+            this.popUpRegister = !this.popUpRegister;
+        },
     },
 })
