@@ -18,6 +18,11 @@ let navbar = new Vue({
         },
         toggleRegister: function () {
             this.popUpRegister = !this.popUpRegister;
+            if(this.popUpRegister) {
+                document.querySelector("body").classList.add("lockscroll");
+            } else {
+                document.querySelector("body").classList.remove("lockscroll");
+            }
         },
     },
 })
