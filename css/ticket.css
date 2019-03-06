@@ -1,0 +1,19 @@
+.seat.none {
+    visibility: hidden;
+}
+
+.seat.available {
+    background-color: green;
+}
+
+.seat.notAvailable {
+    background-color: grey;
+}
+
+.seat.booked {
+    background-color: red;
+}
+
+.seat.selected {
+    background-color: blue;
+}

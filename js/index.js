@@ -31,20 +31,3 @@ let body = new Vue({
     }
 })
 
-Vue.component("movie", {
-    props: {
-        movie: {
-            type: Object,
-            required: true,
-        }
-    },
-    data: function () {
-        return {
-        }
-    },
-    computed: {
-    },
-    template: `<div>
-                    <div v-for="movie in this.movies" :movie="movie" :key="movie.imdbID">{{movie.Title}}</div>
-                </div>`,
-})

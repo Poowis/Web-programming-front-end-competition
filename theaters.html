@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movie</title>
+    <title>Theaters</title>
     <link rel="stylesheet" href="resources/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -162,63 +162,72 @@
     </nav>
 
     <div id="body">
-        <div class="jumbotron-fluid">
-            <img class="img-fluid w-100" :src="movie.WidePoster" alt="">
-        </div>
 
-        <div class="container pb-3">
+        <div class="container">
             <div class="card my-3">
                 <div class="card-body">
-                    <div class="d-flex">
-                        <h5 class="mb-0 mr-auto">
-                            {{movie.Title}}
-                        </h5>
-                        <a class="btn btn-warning" href="theaters.html" role="button" style="margin:-6 0"><i
-                                class="fas fa-ticket-alt"></i> Book tickets</a>
-                    </div>
+                    <form class="form-inline m-0">
+                        <label for="movie">Choose Movie</label>
+                        <select v-model="selectedmovie" class="custom-select ml-2" id="movie">
+                            <option v-for="(movie, index) in movies" :value="index">
+                                {{movie.Title}}
+                            </option>
+                        </select>
+                        <label for="location" class="ml-3">At</label>
+                        <select v-model="selectedlocation" class="custom-select ml-2" id="location">
+                            <option v-for="location in locations" :value="location">
+                                {{location}}
+                            </option>
+                        </select>
+                        <button type="submit" class="btn btn-dark ml-3" @click.prevent>Buy tickets</button>
+                    </form>
                 </div>
             </div>
 
-            <div class="row pb-3">
-
-                <div class="col-md-4">
+            <div class="row mb-3">
+                <div class="col-4">
                     <div class="card">
-                        <img class="card-img-top" :src="movie.Poster" alt="">
+                        <img class="card-img-top" :src="movies[selectedmovie].Poster" alt="">
                     </div>
                 </div>
-
-                <div class="col-md-8">
+                <div class="col-8">
                     <div class="card">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" :src="movie.Video">
-                            </iframe>
+                        <div class="card-body">
+                            <h2 class="card-title">{{movies[selectedmovie].Title}}</h2>
+                            <h4 class="card-title">{{selectedlocation}}</h4>
+                            <p class="card-text">
+                                <b>Runtime:</b> {{movies[selectedmovie].Runtime}}<br>
+                                <b>Genre:</b> {{movies[selectedmovie].Genre}}<br>
+                                <b>Rated:</b> {{movies[selectedmovie].Rated}}<br>
+                                <b>Director:</b> {{movies[selectedmovie].Director}}<br>
+                                <b>Actors:</b> {{movies[selectedmovie].Actors}}<br>
+                                <b>Plot:</b> {{movies[selectedmovie].Plot}}
+                            </p>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text">
-                        <b>Released:</b> {{movie.Released}}<br>
-                        <b>Runtime:</b> {{movie.Runtime}}<br>
-                        <b>Genre:</b> {{movie.Genre}}<br>
-                        <b>Rated:</b> {{movie.Rated}}<br>
-                        <b>Director:</b> {{movie.Director}}<br>
-                        <b>Actors:</b> {{movie.Actors}}<br>
-                        <b>Ratings:</b> Imdb: {{movie.imdbRating}}
-                        <span v-for="rating in movie.Ratings">
-                            <br><span class="invisible">OOOOO</span>
-                            {{rating.Source}}: {{rating.Value}}
-                        </span>
-                        <br>
-                        <b>Plot:</b> {{movie.Plot}}
-                    </p>
+
+            <div class="card mb-3 border-0">
+                <div class="row no-gutters bg-danger">
+                    <div v-for="(round, index) in rounds" class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <button type="button" class="btn btn-danger w-100 rounded-0"
+                            @click="selectedday = index">{{round.day}}</button>
+                    </div>
+                </div>
+                <div v-for="(day, index) in rounds" v-show="index == selectedday" class="row my-2">
+                    <div class="col-2 text-center mt-2">
+                        <h6>Available time</h6>
+                    </div>
+                    <div v-for="round in day.rounds" class="col-2">
+                        <a class="btn btn-dark w-100" href="ticket.html" role="button">{{round}}</a>
+                    </div>
                 </div>
             </div>
-
         </div>
+
+    </div>
 
     </div>
 
@@ -232,7 +241,8 @@
     <script src="resources/vue.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/movies.js"></script>
-    <script src="js/movie.js"></script>
+    <script src="js/theaters.js"></script>
+    <script src="js/theater.js"></script>
 
 </body>
 

@@ -1,19 +1,21 @@
 //All Movie Imdb ids
-let imdb_ids = ["tt3513498", "tt3896198", "tt4139588", "tt6823368", "tt1477834", "tt0437086", "tt1727824", "tt4154796"];
+// let imdb_ids = ["tt3513498", "tt3896198", "tt4139588", "tt6823368", "tt1477834", "tt0437086", "tt1727824", "tt4154796"];
 
-//Fetch Movies
-// let json = [];
-imdb_ids.forEach(function (id) {
-    fetch("http://www.omdbapi.com/?apikey=44453fd5&i=" + id + "&plot=full").then(function (response) {
-        return response.json();
-    }).then(function (myJson) {
-        console.log(JSON.stringify(myJson));
-        // json.push();
-    });
-});
+// //Fetch Movies
+// // let json = [];
+// imdb_ids.forEach(function (id) {
+//     fetch("http://www.omdbapi.com/?apikey=44453fd5&i=" + id + "&plot=full").then(function (response) {
+//         return response.json();
+//     }).then(function (myJson) {
+//         // console.log(JSON.stringify(myJson));
+//         // json.push();
+//     });
+// });
 
 let movies = [
     {
+        "Video": "https://www.youtube.com/embed/cksYkEzUa7k",
+        "WidePoster": "image/lego2.jpg",
         "Title": "The Lego Movie 2: The Second Part",
         "Year": "2019",
         "Rated": "PG",
@@ -52,6 +54,8 @@ let movies = [
         "Website": "http://TheLEGOMovie.com",
         "Response": "True"
     }, {
+        "Video": "https://www.youtube.com/embed/wUn05hdkhjM",
+        "WidePoster": "image/guardians2.jpeg",
         "Title": "Guardians of the Galaxy Vol. 2",
         "Year": "2017",
         "Rated": "PG-13",
@@ -89,6 +93,8 @@ let movies = [
         "Website": "https://marvel.com/guardians",
         "Response": "True"
     }, {
+        "Video": "https://www.youtube.com/embed/6mQDS7Q7pys",
+        "WidePoster": "image/aquaman.jpg",
         "Title": "Aquaman",
         "Year": "2018",
         "Rated": "PG-13",
@@ -126,6 +132,8 @@ let movies = [
         "Website": "http://www.aquamanmovie.com/",
         "Response": "True"
     }, {
+        "Video": "https://www.youtube.com/embed/95ghQs5AmNk",
+        "WidePoster": "image/glass.png",
         "Title": "Glass",
         "Year": "2019",
         "Rated": "PG-13",
@@ -163,6 +171,8 @@ let movies = [
         "Website": "http://www.glassmovie.com/",
         "Response": "True"
     }, {
+        "Video": "https://www.youtube.com/embed/oMHwRal-AR8",
+        "WidePoster": "image/polar.jpg",
         "Title": "Polar",
         "Year": "2019",
         "Rated": "TV-MA",
@@ -200,6 +210,8 @@ let movies = [
         "Website": "N/A",
         "Response": "True"
     }, {
+        "WidePoster": "image/alita.jpg",
+        "Video": "https://www.youtube.com/embed/U3D2vmWD88w",
         "Title": "Alita: Battle Angel",
         "Year": "2019",
         "Rated": "PG-13",
@@ -226,6 +238,8 @@ let movies = [
         "Website": "N/A",
         "Response": "True"
     }, {
+        "Video": "https://www.youtube.com/embed/mP0VHJYFOAU",
+        "WidePoster": "image/bohemian.jpg",
         "Title": "Bohemian Rhapsody",
         "Year": "2018",
         "Rated": "PG-13",
@@ -263,6 +277,8 @@ let movies = [
         "Website": "http://www.bohemianrhapsody.com",
         "Response": "True"
     }, {
+        "Video": "https://www.youtube.com/embed/hA6hldpSTF8",
+        "WidePoster": "image/avengers.jpg",
         "Title": "Avengers: Endgame",
         "Year": "2019",
         "Rated": "N/A",

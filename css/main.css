@@ -23,28 +23,7 @@ body.lockscroll {
     padding-top:56px;
 }
 
-#genrebar {
-    top: 56px;position: 
-    relative; 
-    z-index: 100;
-}
-
-#movies:before {
-    display: block;
-    content: "";
-    height: 56px;
-    margin-top: -56px;
-}
-
-
-.seat {
-    border: 5px solid red;
-    border-top: none;
-    border-top-left-radius: 4px; 
-    border-top-right-radius: 4px; 
-    border-bottom-right-radius: 12px 8px; 
-    border-bottom-left-radius: 12px 8px;
-}
+/* ---------- */
 
 .slide-enter-active, .slide-leave-active {
     transition: .5s;
@@ -59,8 +38,6 @@ body.lockscroll {
     right: -100%;
 }
 
-
-
 .fade-enter-active, .fade-leave-active {
     transition: .3s;
 }
@@ -73,3 +50,20 @@ body.lockscroll {
 .fade-move {
     transition: .5s;
 }
+
+/* ---------- */
+
+/* .bg-red {
+    background-color: hsl(0, 87%, 45%);
+}
+
+.bg-black {
+    background-color: hsl(210, 5%, 10%);
+}
+
+.btn-red {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+ */

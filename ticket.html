@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movie</title>
+    <title>Ticket</title>
     <link rel="stylesheet" href="resources/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/ticket.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
@@ -31,11 +32,11 @@
 
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="" @click.prevent>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html#movies">
                         <i class="fas fa-film"></i> Movies</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="theaters.html">
                         <i class="fas fa-video"></i> Theatres</a>
                 </li>
@@ -162,62 +163,124 @@
     </nav>
 
     <div id="body">
-        <div class="jumbotron-fluid">
-            <img class="img-fluid w-100" :src="movie.WidePoster" alt="">
-        </div>
 
-        <div class="container pb-3">
-            <div class="card my-3">
-                <div class="card-body">
-                    <div class="d-flex">
-                        <h5 class="mb-0 mr-auto">
-                            {{movie.Title}}
-                        </h5>
-                        <a class="btn btn-warning" href="theaters.html" role="button" style="margin:-6 0"><i
-                                class="fas fa-ticket-alt"></i> Book tickets</a>
-                    </div>
-                </div>
-            </div>
+        <div class="container my-3">
 
-            <div class="row pb-3">
+            <div class="row">
 
-                <div class="col-md-4">
+                <div class="col-lg-8">
                     <div class="card">
-                        <img class="card-img-top" :src="movie.Poster" alt="">
-                    </div>
-                </div>
+                        <div class="card-body">
 
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" :src="movie.Video">
-                            </iframe>
+                            <div class="row justify-content-center pb-3">
+                                <div class="col-10">
+                                    <div class="card bg-dark rounded-pill">
+                                        <h2 class="text-center p-2 text-light">Screen</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2" v-for="row in theater.rows">
+                                <div class="col-1 text-center">
+                                    {{row.name}}
+                                </div>
+                                <div id="seats" class="col-10 text-center">
+                                    <div class="row">
+                                        <div class="seat PY-2 rounded" :style="seatwidth" @click="addSeat(seat);"
+                                            :class="[seat.status, seat.type]" v-for="seat in row.seats">
+                                            {{seat.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1 text-center">
+                                    {{row.name}}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-            </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">{{movie.Title}}</h2>
+                            <h4 class="card-title">{{location}}</h4>
+                            <h5 class="card-title">Selected seats</h5>
+                            <div class="row">
+                                <div class="col-4">
+                                    <h6 class="card-title">
+                                        Seat
+                                    </h6>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class="card-title">
+                                        Type
+                                    </h6>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class="card-title">
+                                        Price
+                                    </h6>
+                                </div>
+                            </div>
+                            <div v-for="seat in selectedSeats" class="row">
+                                <div class="col-4">
+                                    {{seat.name}}
+                                </div>
+                                <div class="col-4">
+                                    {{seat.type}}
+                                </div>
+                                <div class="col-4">
+                                    {{seat.price}}
+                                </div>
 
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text">
-                        <b>Released:</b> {{movie.Released}}<br>
-                        <b>Runtime:</b> {{movie.Runtime}}<br>
-                        <b>Genre:</b> {{movie.Genre}}<br>
-                        <b>Rated:</b> {{movie.Rated}}<br>
-                        <b>Director:</b> {{movie.Director}}<br>
-                        <b>Actors:</b> {{movie.Actors}}<br>
-                        <b>Ratings:</b> Imdb: {{movie.imdbRating}}
-                        <span v-for="rating in movie.Ratings">
-                            <br><span class="invisible">OOOOO</span>
-                            {{rating.Source}}: {{rating.Value}}
-                        </span>
-                        <br>
-                        <b>Plot:</b> {{movie.Plot}}
-                    </p>
+                            </div>
+                            <h5 class="card-title mt-2">Total Price</h5>
+                            {{total}} Baht
+                            <br>
+                            <form>
+                                <div class="form-check">
+                                    <input v-model="paytype" class="form-check-input" type="radio" name="pay" id="cash"
+                                        value="cash" checked>
+                                    <label class="form-check-label" for="cash">
+                                        Cash
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input v-model="paytype" class="form-check-input" type="radio" name="pay"
+                                        id="creditcard" value="creditcard">
+                                    <label class="form-check-label" for="creditcard">
+                                        Credit Card
+                                    </label>
+                                </div>
+                                <div v-show="paytype == 'creditcard'">
+                                    <div class="form-group">
+                                        <label for="cardnumber">Credit card number</label>
+                                        <input type="text" class="form-control" id="cardnumber"
+                                            placeholder="Credit card number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="secnumber">Security Number</label>
+                                        <input type="password" class="form-control" id="secnumber"
+                                            placeholder="Security Number">
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input v-model="paytype" class="form-check-input" type="radio" name="pay"
+                                        id="promtpay" value="promtpay">
+                                    <label class="form-check-label" for="promtpay">
+                                        Promt Pay
+                                    </label>
+                                </div>
+                                <img v-show="paytype == 'promtpay'" src="image/qr.png" alt="QR code">
+                            </form>
+                            <!-- <a v-if="paytype == 'cash'" class="btn btn-dark" href="confirmcash.html" role="button">Confirm</a> -->
+                            <a class="btn btn-dark" href="confirm.html" role="button">Confirm</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
 
     </div>
@@ -232,7 +295,9 @@
     <script src="resources/vue.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/movies.js"></script>
-    <script src="js/movie.js"></script>
+    <script src="js/theaters.js"></script>
+    <script src="js/ticket.js"></script>
+
 
 </body>
 

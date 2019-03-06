@@ -1,0 +1,13 @@
+
+#genrebar {
+    top: 56px;position: 
+    relative; 
+    z-index: 100;
+}
+
+#movies:before {
+    display: block;
+    content: "";
+    height: 56px;
+    margin-top: -56px;
+}

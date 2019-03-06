@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movie</title>
+    <title>Confirmed Ticket</title>
     <link rel="stylesheet" href="resources/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -162,62 +162,86 @@
     </nav>
 
     <div id="body">
-        <div class="jumbotron-fluid">
-            <img class="img-fluid w-100" :src="movie.WidePoster" alt="">
-        </div>
 
-        <div class="container pb-3">
-            <div class="card my-3">
-                <div class="card-body">
-                    <div class="d-flex">
-                        <h5 class="mb-0 mr-auto">
-                            {{movie.Title}}
-                        </h5>
-                        <a class="btn btn-warning" href="theaters.html" role="button" style="margin:-6 0"><i
-                                class="fas fa-ticket-alt"></i> Book tickets</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row pb-3">
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <img class="card-img-top" :src="movie.Poster" alt="">
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" :src="movie.Video">
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+        <div class="container py-3">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-text">
-                        <b>Released:</b> {{movie.Released}}<br>
-                        <b>Runtime:</b> {{movie.Runtime}}<br>
-                        <b>Genre:</b> {{movie.Genre}}<br>
-                        <b>Rated:</b> {{movie.Rated}}<br>
-                        <b>Director:</b> {{movie.Director}}<br>
-                        <b>Actors:</b> {{movie.Actors}}<br>
-                        <b>Ratings:</b> Imdb: {{movie.imdbRating}}
-                        <span v-for="rating in movie.Ratings">
-                            <br><span class="invisible">OOOOO</span>
-                            {{rating.Source}}: {{rating.Value}}
-                        </span>
-                        <br>
-                        <b>Plot:</b> {{movie.Plot}}
-                    </p>
+                    <div class="d-flex">
+                        <h2 class="mb-0 mr-auto">
+                            Confirmed Ticket
+                        </h2>
+                        <a class="btn btn-warning" href="#" role="button"><i
+                                class="fas fa-ticket-alt"></i>Print</a>
+                    </div>
                 </div>
             </div>
 
+            <div class="row my-3">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                {{movie.Title}}
+                            </h4>
+                        </div>
+                        <img :src="movie.Poster" alt="">
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <div v-for="seat in seats" class="card mb-3">
+
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{movie.Title}}
+                                    </h5>
+                                    <h6 class="card-title">
+                                        {{location}}
+                                    </h6>
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <h6 class="card-title">
+                                                Date:
+                                            </h6>
+                                            {{date}}
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="card-title">
+                                                Time:
+                                            </h6>
+                                            {{time}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-6">
+                                                <h6 class="card-title">
+                                                    Theater:
+                                                </h6>
+                                                {{theater}}
+                                            </div>
+                                            <div class="col-6">
+                                                <h6 class="card-title">
+                                                    Time:
+                                                </h6>
+                                                {{seat.name}}
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </div>
+                            <div class="col-4">
+                                <img class="w-100" :src="movie.Poster" alt="">
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
         </div>
 
     </div>
@@ -232,7 +256,29 @@
     <script src="resources/vue.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/movies.js"></script>
-    <script src="js/movie.js"></script>
+
+    <script>
+        let body = new Vue({
+            el: "#body",
+            data: {
+                movie: movies[0],
+                location: "Mega Bangna",
+                theater: "01",
+                date: "4 Mar 2019",
+                time: "16:00",
+                seats: [
+                    {
+                        name: "B1"
+                    },
+                    {
+                        name: "B2"
+                    }
+                ]
+
+            }
+        });
+
+    </script>
 
 </body>
 
